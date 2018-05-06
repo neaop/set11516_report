@@ -2,10 +2,33 @@
 This report serves to document and present the processes, methods, and
 technologies utilised in the development of a combined real-world and
 simulated implementation of a robotic Simultaneous Location and Mapping
-system - allowing a physical robot to map environment, .
+system - allowing a physical robot to map environment, calculate an optimal route
+through said environment, and then execute the simulated movement.
+
+The autonomous mapping of, and subsequent movement around unknown environments via
+robotic agents has long been area of interest, and numerous implementations of
+the concept are readily available in commercial products such as the Roomba
+autonomous vacuum cleaner, or the Miimo robotic lawnmower developed by Honda.
+
+Most current implementations of self mapping robots require some form of
+specialist or dedicated sensors to accurately navigate and record a new
+environment.
+While use of this specialist equipment has proven effective when attempting
+to implement  mapping and navigation solutions, the financial and work costs of
+such systems can often make them unfeasible.
+One of the goals for this project was to investigate the possibility of
+implementing a localisation and mapping solution using a robot lacking
+the specialist hardware often present in commercial and research
+implementations.
+
 
 
 \subsection{Main Topics}
+This project explored and utilised a wide array of technologies and techniques to research,
+implement and test the proposed system.
+The key concepts of the project are briefly described in order to give some
+insight to some of the approaches utilised .
+
 \subsubsection{SLAM}
 Simultaneous Location and Mapping (SLAM) is computational problem relating
 to the tracking of an agent's location in an environment while concurrently
@@ -14,7 +37,7 @@ constructing a map of the environment that contains the agent.
 The primary difficulty to producing a solution to the SLAM problem is
 that SLAM is a circular problem: in order to accurately determine a location
 within an area, a map of said area is required - and in order to create a map
-of environment, an agent already needs to be aware of it's location in the
+of environment, an agent is required to already be aware of it's location in the
 environment.
 
 A number of algorithms and approaches have been theorised and developed to
@@ -26,52 +49,102 @@ Further discussion of SLAM and SLAM solutions is provided in Section REF HERE!
 
 
 \subsubsection{Routing}
-Routing problems consists of a simple premise: ``What is the optimal path to
-take to travel from point A to B''.
+Routing problems consist of a simple premise: ``What is the optimal path to
+take to travel from point A to point B''.
 The main difficulties present in the routing problem domain typically consist of
 defining what 'optimal' means, and selecting the single best solution from the
 huge array of possible answers.
 
-In terms of optimisation, the best solution may be the path that takes the
-least time, covers the smallest amount of distance, requires the less
-resources, or any combination of the previous metrics.
+In terms of optimisation, the `best' solution to a routing problem may be the path that takes the
+least time, covers the smallest amount of distance, requires the least
+resources, or any combination of the previous and other metrics.
 
-Much like SLAM, a wide range of algorithms and formula have been researched
+Much like SLAM, a wide range of algorithms and solutions have been researched
 and evaluated to solve the routing problem - a selection of which are
 discussed in Section REF HERE!
 
 
 \subsubsection{Robotic Simulation}
 Robotic simulators allow a robot's hardware or behaviour to be tested and
-evaluated without relying upon the physical robot.
+evaluated without relying upon a physical robot.
+Simulators provide a number of benefits when researching, developing, or
+evaluating new solutions to a problem domain, or when time or resource
+expensive tests or scenarios need to be replicated or repeated to prove a
+concept or design.
+
+Simulators come in various styles and appearance; some rendering a virtual
+three-dimensional  environment and robots, others offer no such visualisation,
+requiring a much smaller runtime cost - allowing multiple robots or
+environments to be tested simultaneously.
 
 Regardless of the type of simulator utilised, the technology allows for
-consistent tests to be conducted, and the testing parameters to be altered at
-a reduced cost - both in terms of time and hardware requirements.
+consistent, repeatable tests and scenarios to be conducted, and testing
+parameters to be altered at a reduced cost - both in terms of time and
+hardware requirements.
+Descriptions of the simulation tools and techniques utilised in this project
+are discussed further in Section REF HERE!.
 
 
 \subsubsection{Research questions}
-The main questions the project addressed.
+In order to keep the scope of this project somewhat reasonable, and as an
+attempt to prevent `feature-creep' distracting from the primary project aims,
+the following research question was proposed:
+\begin{quote}
+    ``Is it feasible for a robot to map an environment, simulate an optimal route
+    through said environment, and then execute the simulated route - without
+    external hardware or equipment?''
+\end{quote}
 
+The previous research question can be further broken down into the following
+sub-queries:
+
+\begin{quote}
+    ``Is it possible to implement a SLAM solution using a robot with limited or
+    primitive hardware?''
+\end{quote}
+
+\begin{quote}
+    ``Is it possible for a robot to execute its own lightweight simulator using
+    integrated hardware?''
+\end{quote}
+
+Each of the proposed sub-queries are key areas of research, both in academia
+and industry.
+Being able to implement solutions to complex problems using simple hardware
+can greatly improve the cost efficiency of an organisation - leading to
+finances being available for more costly projects or research. 
+Additionally, implementing lightweight or computationally inexpensive software
+solutions provides multiple benefits - such as embedding software onto small,
+dedicated systems, or simply reducing the amount memory a system requires to
+implement and execute a software solution. 
+
+The research questions presented previously were utilised throughout all
+stages of this project, in order to ensure effort and time was utilised
+efferently upon key aspects of development and research - and ultimately
+forwarding the progress of the project.
 
 \subsection{Report Structure}
 This report is divided appropriately;
 
-A background review and analysis of existing literature, white papers, and
-documentation; in order to both prove the feasibility of, and justify this
+\begin{itemize}
+
+\item A background review and analysis of existing literature, white papers, and
+documentation; in order to both prove the feasibility of and justify this
 project and the techniques and technologies utilised in its execution.
 
-A description of the methods and technologies utilised during the development
+\item A description of the methods and technologies utilised during the development
 and testing of the system.
 
-Details of the metrics used to evaluate the project.
+\item Details of the metrics used to evaluate the project.
 
-Presentation of findings made during the implantation or testing.
+\item Presentation of findings made during the implantation or testing.
 
-An evaluation of the techniques used, and the results of the project.
+\item An evaluation of the techniques used, and the results of the project.
 
-A summery concluding the key findings of the project and potential future
+\item A summery concluding the key findings of the project and potential future
 work.
 
-The personal reflections of the authors, their opinions of project, and any
+\item The personal reflections of the authors, their opinions of project, and any
 improvements or changes that they have observed in hindsight.
+
+\end{itemize}
