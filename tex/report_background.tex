@@ -4,9 +4,9 @@ technical papers, and studies with the aim of providing context and evidence
 of feasibility for this project.
 
 The majority of the literature presented was aggregated prior to planning and
-implementation of the simulated/real-world SLAM solution documented in this report,
-and thus provided the inspiration and domain specific knowledge required to
-carry out the project.
+implementation of the simulated/real-world SLAM solution documented in this
+report, and thus provided the inspiration and domain specific knowledge
+required to carry out the project.
 
 
 \subsection{SLAM}
@@ -76,7 +76,6 @@ solutions, and while the two papers discussed previously were mostly
 theoretical or general, they paved the way for more concrete implementations
 of SLAM and autonomous navigation solutions as we currently know them.
 
-
 One of the first successful practical applications of a SLAM solution outside of
 research experiments was in 2005, when Stanford University claimed first
 place in the DARPA Grand Challenge.
@@ -128,22 +127,58 @@ methods - an approach suggested by \citeauthor{Smith1986} in their preliminary
 exploration of the field.
 Monte Carlo methods are algorithms that operate by repeatedly collecting
 random samples in order to generate a probabilistic estimate.
-Two of the more common aproaches to SLAM problems that utilise Monte Carlo
+Two of the more common approaches to SLAM problems that utilise Monte Carlo
 techniques are {\bf Kalman Filters} and {\bf Particle Filters}.
 
 `SLAM for Dummies' is a tutorial paper that describes the process of
 implementing an Extended Kalman Filter based solution to the SLAM problem
 \cite{Riisgaard2004}.  
-The title of the paper belies the thourgher and involved process the aurthors
+The title of the paper belies the through and involved process the authors
 took to fully document the hardware, tools, and techniques utilised -
-providing a fully fleshed and informaitive guide to implementation of a fully
+providing a fully fleshed and informative guide to implementation of a fully
 functional SLAM solution.
 \citeauthor{Riisgaard2004}'s paper was paramount to the inception and
 development of this project, providing much needed context and explanation to
 much of the domain specific terminology utilised by other studies in the
 domain.
 
+
 \subsubsection{Inexpensive Robots}
+The early research into SLAM solutions, and mobile robot navigation in general
+had a strong focus on producing suitable methods that did not require
+extravagant, expensive, or niche hardware to function.
+In much the same vein as the seminal studies into Spatial Estimation, this
+project aims to produce a SLAM solution utilising an inexpensive mobile
+robot platform.
+The studies presented thusly provide insight and evidence into the
+construction of navigation solutions using more affordable technologies.
+
+The SLAM problem requires robots to be able detect or observe their
+surroundings to accurately estimate their location or plat points to a map.
+An issue with many inexpensive real-world sensors is that lack detection
+fidelity past a certain range.
+Typical SLAM solutions utilise sensors mounted to a robot perpendicular to
+floor, i.e. detecting objects horizontal to the robot.
+In order to counter affordable sensor's limited range of effectiveness, several
+studies have opted to instead monitor and observe differences in the surface
+that a robot moves across to estimate the robot's location.
+
+A 2016 study proved that it was indeed possible for a robot to be able to
+localise itself utilising infrared sensors to detect the grey-scale colour of
+the ground beneath the robot and approximate dead-reckoning \cite{Wang2016}.
+The system described in the paper utilises a two forms of {\bf Monte Carlo}
+method to aid in determining the robot's location.
+The paper described how robotic agents moving over a well defined landscape -
+in the case of the study; A2 size patterns were used, could utilise
+their low-performance sensors to detect the colour beneath themselves and
+calculate their approximate position.
+While the premise and results of the paper were promising, the robtic agents
+required the robotic agents to have prior knowledge the area in which they
+were localising - providing a solution for only half of the SLAM problem.
+While not a complete solution to SLAM, the paper does show that at least
+localisation is possible using only low-quality infrared sensors.
+
+ 
 
 \subsection{Routing Problems}
 
@@ -152,7 +187,9 @@ domain.
 
 
 \pagebreak
-{\bf REWORK}
+
+\noindent\rule{\textwidth}{1pt}
+{\bf REWORK!}
 \subsection{Autonomous Robots and Vehicles}
 SLAM, and autonomous navigation in general, has long been concept of interest
 in a range of domains.
@@ -271,3 +308,5 @@ It is crucial to note that the technologies outlined are not exclusive to
 the military sector, in fact Lokheed has previously stated there goal of
 reworking there autonomous platforms to be suitable for use in the consumer and
 public domains, such as medical and search and rescue.
+
+\noindent\rule{\textwidth}{1pt}
