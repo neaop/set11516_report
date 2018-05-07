@@ -9,6 +9,150 @@ and thus provided the inspiration and domain specific knowledge required to
 carry out the project.
 
 
+\subsection{SLAM}
+As previously stated, SLAM is computational problem consisting of the
+completion of the tasks robotic navigation and robotic mapping in parallel.
+SLAM solutions are often highly tailored to a particular technology,
+environment, or accuracy - and as such are utilised as approximation
+techniques, rather than a perfect resolution.
+
+Countless systems employing SLAM techniques have been researched and developed
+for multiple domains, including but limited to; self-driving cars, planetary
+rovers, domestic robots, and unmanned aerial and submersible vehicles.
+
+\subsubsection{Origins}
+The preliminary investigation into SLAM and SLAM solutions was conducted by
+R.C. Smith and P. Cheeseman in 1986 with their exploration of the concept of
+Spatial Uncertainty and manners in which it could be estimated
+\cite{Smith1986,Smith1988}.
+Within these works it was reasoned that it would be advantageous for robots to
+be able to estimate their current location relative to objects or obstacles
+within an environment.
+
+An example provided within the seminal study describes being
+able to calculate the probability of a robot being able to pass through a
+door frame, given the robots uncertain location, the uncertain location of the
+door, and the likelihood that the robot's sensors can detect said door
+\cite{Smith1986}. 
+The paper goes on to describe how a robot's estimated location grows in
+uncertainty as moves from its initial location, and that by utilising the
+robot's sensors to make relative measurements between objects or features in the
+environment, probabilistic information can be gained about the global
+environment - and thus the robots location.
+The paper proposed a potential estimation method that could be used to aid
+in the spatial estimation of a robot in an environment, and the simulations
+conducted suggested it was possible to attain close to 90\% accuracy utilising
+Monte Carlo and Gaussian techniques.
+
+Smith and Cheeseman's later work with M. Self focused on the concept of
+representing spatial information in a `Spatial Map', and the probabilistic
+manners in which the map could be constructed, read, and revised as new
+information of the environment was gained \cite{Smith1988}.
+The motivation behind \citeauthor{Smith1988}'s paper was to aid mobile robots
+navigate an environment, without the need of extremely precise and expensive
+sensors, or known fixed calibration locations in the area.
+The study discusses how the use of inexpensive, overlapping sensors could be
+used in the stead of more advanced sensors, provided that the uncertainty of
+each sensors measurements were combined when said measurements were utilised
+for navigation calculations.
+The paper goes on to make the argument that when utilising inexpensive mobile
+robots that overlapping low quality sensors may be one of the only ways to
+implement a navigation solution of sufficient operational accuracy.
+A simple description of the proposed techniques is described in the paper, and
+bears many resemblances to modern SLAM solutions:
+
+\begin{itemize}
+    \item The robot senses object \#1.
+    \item The robot moves. 
+    \item The robot senses an object (object \#2) which it determines cannot be
+    object \#1.
+    \item Trying again, the robot succeeds in sensing object \#1, thus helping
+    to localize itself, object \#1, and object \#2.
+\end{itemize}
+
+\citeauthor*{Smith1988}'s work into the concept of Spatial Estimation
+provided much of the early footwork required to advance SLAM and SLAM
+solutions, and while the two papers discussed previously were mostly
+theoretical or general, they paved the way for more concrete implementations
+of SLAM and autonomous navigation solutions as we currently know them.
+
+
+One of the first successful practical applications of a SLAM solution outside of
+research experiments was in 2005, when Stanford University claimed first
+place in the DARPA Grand Challenge.
+The DARPA Grand Challenge was a competition funded by the American Defence
+Advanced Research Projects Agency, where competitions were challenged to
+develop autonomous ground vehicles that could navigate a lengthy, off-road
+course in a given time limit. 
+STANLEY (Stanford Universities vehicle), utilised a stock Volkswagen
+Touareg R5, a number of sensors, and numerous SLAM techniques to navigate the
+desert course.
+
+In 2007 the DARPA Grand Challenge took place in an urban environment, forcing
+competing vehicles to comply with traffic regulations and other road vehicles.
+Stanford's entry to the 2007 completion, JUNIOR utilised much of the same
+technologies and techniques as its predecessor STANLEY, and was able to achieve
+second place in the competition.
+
+Sebastian Thrun headed the Stanford University team in each of the DARPA Grand
+Challenges, and his entries utilisation of SLAM techniques to aid in
+navigation has been credited as bringing SLAM into public focus, promoting
+further development and utilisation of SLAM solutions in navigation based
+applications. REF here!
+
+\subsubsection{SLAM Algorithms}
+As a concept, SLAM has existed for a substantial period, and as such multiple
+potential solutions to the problem have been developed.
+As previously stated, suitability of SLAM algorithm depends heavily on the,
+environment to be navigated, the available hardware, and the type of map to
+produced - meaning that no single SLAM solution can be considered optimal for
+all permutations of equipment and environmental parameters.
+New SLAM algorithms and solutions are still being theorised and tested, as
+navigation problems remain a key interest of research - both in industry and
+academia.
+
+The SLAM problem can be represented simply in a formulaic manner:
+
+\[ P(m_t,x_t|o_{1:t}) \]
+
+Considering a set of sensors observations \(o_t \), over a number of time
+steps \(t\), the goal of a SLAM solution is to probabilistically calculate an
+estimated map of an environment \(m_t\), and the location of an agent in said
+map \(x_t\).
+
+While simple to describe, the SLAM problem requires significantly more
+involved techniques to provide a satisfactory solution.
+
+Statistical approaches to SLAM problems are common, specifically Monte Carlo
+methods - an approach suggested by \citeauthor{Smith1986} in their preliminary
+exploration of the field.
+Monte Carlo methods are algorithms that operate by repeatedly collecting
+random samples in order to generate a probabilistic estimate.
+Two of the more common aproaches to SLAM problems that utilise Monte Carlo
+techniques are {\bf Kalman Filters} and {\bf Particle Filters}.
+
+`SLAM for Dummies' is a tutorial paper that describes the process of
+implementing an Extended Kalman Filter based solution to the SLAM problem
+\cite{Riisgaard2004}.  
+The title of the paper belies the thourgher and involved process the aurthors
+took to fully document the hardware, tools, and techniques utilised -
+providing a fully fleshed and informaitive guide to implementation of a fully
+functional SLAM solution.
+\citeauthor{Riisgaard2004}'s paper was paramount to the inception and
+development of this project, providing much needed context and explanation to
+much of the domain specific terminology utilised by other studies in the
+domain.
+
+\subsubsection{Inexpensive Robots}
+
+\subsection{Routing Problems}
+
+\subsection{Robotic Simulators}
+
+
+
+\pagebreak
+{\bf REWORK}
 \subsection{Autonomous Robots and Vehicles}
 SLAM, and autonomous navigation in general, has long been concept of interest
 in a range of domains.
