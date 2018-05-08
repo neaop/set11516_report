@@ -2,13 +2,86 @@
 %What was done.
 As indicated by the posed research queries in Section \ref{sec_res_q},
 this project consisted of two distinct development tasks:
+
 \begin{itemize}
 \item Implementation of a SLAM solution on a Thymio II robot.
 \item Parallelisation of the existing Thymio simulator.
 \end{itemize}
 
-\subsection{Robot}
-What was implemented on the robot and limitations of the platform.
+Due to the loose coupling of the simulator and the SLAM implementation, each of
+the development tasks could be conducted in parallel by individual project
+members.
+The methodology and development techniques of each deliverable is detailed
+below.
+
+\subsection{SLAM Solution}
+%What was implemented on the robot and limitations of the platform.
+As has been previously detailed, SLAM solutions consists of three main
+operations:
+\begin{itemize}
+    \item Robotic movement
+    \item Sensor observation
+    \item Map update
+\end{itemize}
+The three SLAM steps provided a simple and intuitive manner to divide the
+implementation of an algorithmic solution of the SLAM problem.
+
+\subsubsection{Robotic Movement}
+The navigational portion of a SLAM solution requires a robot to not only move
+through an area, but to also keep an approximate record of how each movement
+has altered it's position in the environment.
+
+There are two main approaches to allow a robot to estimate is position
+without external aid; odometry and dead-reckoning.
+
+Odometry is considered the preferable option for estimated localisation, as
+the motion sensors required for implementing the feature can be extremely
+reliable, resulting is very accurate estimations.
+The alternative solution to onboard localisation estimation is via
+dead-reckoning - where location is estimated based upon the speed that the
+robot was travelling.
+The basic dead-reckoning calculation is identical to the kinematic
+distance formula:
+
+\[ D = V \times T\]
+
+Where the distance travelled \(D\) is equal to the product of velocity of
+movement \(V\) and the time spent travelling \(T\).
+
+As the Thymio II's wheels were not equipped with any form of rotary encoders,
+native odometery was not possible, and thus dead-reckoning had to be used for
+localisation estimation.
+Though Thymio systems have been utilised as testing platforms in multiple
+studies, including SLAM solutions that utilise dead-reckoning, the Thymio II
+system does not include dead-reckoning `out-of-the-box' and thus a bespoke
+implementation had to be developed.
+Investigation into previous implementations of dead-reckoning on a Thymio
+system reviled little usable, or adaptable software that could be utilised for
+this project.
+The only code relating to Thymio II estimated location was found in a
+navigation driver plug-in for the Robot Operating System (ROS) - an open-source
+middle-ware for robot control.
+As the Thymio II used in this study was not utilising ROS as system driver,
+the navigation plug-in could not be implemented directly - but still provided
+significant insight into how the bespoke dead-reckoning could be implemented.
+
+The ROS Thymio II navigation driver indicated that a unmodified Thymio II
+robot had a speed coefficient - or hypothetical speed of 2.93.
+Ad hoc experimentation using the Aseba simulator revealed that ROS navigation
+module's estimated speed coefficient was accurate, but this value was not
+representative of the real-world robot.
+The Thymio II robot utilises an integrated battery to power its self, and
+during operation the internal voltage of the battery is drained.
+Unfortunately, due to the lack of power regulation, as the voltage of the
+internal battery dropped, so to did the speed of the robots wheels.
+The inconsistent speed wheel at which the wheels operated meant that the
+constant speed coefficient extracted from the ROS package could not be used to
+accurately determine the location of the robot - as the longer that the robot
+was mobile, the slower its wheels would operate, resulting in more inaccurate
+predictions as time moved on.
+
+
+
 
 \subsection{Simulator}
 How the simulator was implemented/improved.
