@@ -122,9 +122,9 @@ map \(x_t\).
 While simple to describe, the SLAM problem requires significantly more
 involved techniques to provide a satisfactory solution.
 
-Statistical approaches to SLAM problems are common, specifically Monte Carlo
-methods - an approach suggested by \citeauthor{Smith1986} in their preliminary
-exploration of the field.
+Statistical approaches to SLAM problems are common, specifically {\bf Monte
+Carlo} methods - an approach suggested by \citeauthor{Smith1986} in their
+preliminary exploration of the field.
 Monte Carlo methods are algorithms that operate by repeatedly collecting
 random samples in order to generate a probabilistic estimate.
 Two of the more common approaches to SLAM problems that utilise Monte Carlo
@@ -141,7 +141,6 @@ functional SLAM solution.
 development of this project, providing much needed context and explanation to
 much of the domain specific terminology utilised by other studies in the
 domain.
-
 
 \subsubsection{Inexpensive Robots}
 The early research into SLAM solutions, and mobile robot navigation in general
@@ -178,7 +177,44 @@ were localising - providing a solution for only half of the SLAM problem.
 While not a complete solution to SLAM, the paper does show that at least
 localisation is possible using only low-quality infrared sensors.
 
- 
+Due to their low cost, relative ease of use, and low power consumption,
+infrared sensors have become a common replacement to more costly - but
+effective, laser scanners.
+Numerous investigations have been conducted to determine whether infrared
+sensor alone can provide enough detailed data to allow successful SLAM
+navigation.
+
+A 2008 study experimented with a commercial vacuum cleaner robot and 7 infrared
+sensors to determine whether it was possible to construct a successful SLAM
+solution using the `noisy' data provided by the sensors \cite{Choi2008}.
+The sensors utilised in the investigation had an effective range of 20-150cm -
+outwit these ranges the sensors were unreliable or excessively noisy to
+correctly observe the environment.
+The 7 infrared sensors were equally spaced around the forward facing half of
+the circular robot - and the robot's built in odometry provided an estimated
+location for the robot once it had moved from it's random initial starting
+location.
+In terms of the implemented algorithm, a {\bf Line Feature} SLAM solution was
+developed - line based SLAM solution limit the mobile robot's movements to
+consist of straight, orthogonal, and parallel lines.
+While the forced geometric movements of the robots in the study limited the
+exploration potential of the system, it provided ample navigation of a typical
+room layout - ideal for domestic platforms, such as the one utilised in the
+study.
+An {\bf Extended Kalman Filter} model was utilised to calculate feature
+distance estimations and measurement uncertainties.
+Tests indicated that the  robot was able to successfully navigate a 4x4 meter
+room containing free standing and wall contact obstacles.
+Considering the robot's effective sensor range only reached ~37\% of the rooms
+total size, the robots ability to successfully, navigate and map the room and
+its contents indicates that infrared sensors and odometery can be utilised to
+implement SLAM solutions - at least for simple environments.
+
+Preliminary investigation into the use of inexpensive robotic platforms or
+sensing hardware indicates that infrared sensors and some form of estimated
+localisation (dead-reckoning, or isometry) can lead to successful SLAM solution
+implementations.
+
 
 \subsection{Routing Problems}
 
