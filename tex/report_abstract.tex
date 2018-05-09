@@ -1,0 +1,31 @@
+\begin{abstract}
+%concise summary of the study
+The paper documents the processes of investigation, implementation, and
+evaluation of Simultaneous Localisation and Mapping solution utilising an
+inexpensive robot and a simulation system.
+The goal of the project was to implement a mapping algorithm on the physical
+robot, which would explore and document environment.
+Once a map of an area had been generated the robot would be able to utilise
+the simulation software to calculate optimal routes through the environment,
+before executing said movements in the real world.
+A Thymio II wireless robot and the Aseba simulator were utilised as
+development platforms due to low cost and availability.
+Due to the Thymio II's lack of odometry and limited sensors, it was not
+possible to implement localisation and mapping algorithms of sufficient
+accuracy to enable the robot navigate and document an area.
+The simulator was modified to reduce the required computational cost of
+operation and allow multiple simulators to execute in parallel - enabling
+systems of limited computational power to perform simulated robotic
+navigation.
+The study concludes that while it would be possible to implement a
+localisation and mapping solution on an inexpensive robot, said robot would
+require either; some form odometry or accurate dead-reckoning, or
+distance sensors of sufficient accuracy and with an effective range
+significantly greater than the dimensions of the robot carrying them -
+features not present in the Thymio II system.
+The modified simulator's runtime requirements were made sufficiently small that
+it could be executed on device that would impede the Thymio II's mobility,
+potentially allowing the robot to simulate navigation of the mapped area.
+While the study did manage to achieve the all the initially planned
+deliverables, details of limitations and potential solutions are provided.
+\end{abstract}
