@@ -20,7 +20,7 @@ As has been previously detailed, SLAM solutions consists of three main
 operations:
 \begin{itemize}
     \item Robotic movement
-    \item Sensor observation
+    \item Obstacle observation
     \item Map update
 \end{itemize}
 The three SLAM steps provided a simple and intuitive manner to divide the
@@ -43,7 +43,7 @@ robot was travelling.
 The basic dead-reckoning calculation is identical to the kinematic
 distance formula:
 
-\[ D = V \times T\]
+\[ D = V \times T \]
 
 Where the distance travelled \(D\) is equal to the product of velocity of
 movement \(V\) and the time spent travelling \(T\).
@@ -80,8 +80,96 @@ accurately determine the location of the robot - as the longer that the robot
 was mobile, the slower its wheels would operate, resulting in more inaccurate
 predictions as time moved on.
 
+A second issue regarding robot's mobility was also discovered during the
+experimentation process - the Thymio II's inability to travel in a straight
+line.  
+The Thymio robotic platform's movement operations are controlled by issuing
+commands to change the speed and direction of each wheel individually - by
+setting both wheels to the same speed and direction the robot should move in a
+straight line.
+Experimentation revelead that left wheel of the Thymio II utilised in this
+project was unable to match the same speed as the right wheel - causing the
+robot to curve leftwards when attempting to move directly forwards.
+The cause for this issue was unapparent, but a number of possible reasons were
+considered:
 
+\begin{itemize}
+\item Friction between the wheel and robot chassis.
+\item Unbalanced power regulation.
+\item Poor production tolerances.
+\end{itemize}
 
+A theorised solution was to limit the speed of the rightmost wheel to
+percentage of the left.
+While theoretically sound, the proposed solution proved futile, as the speed of
+the robot's wheels were coupled non-linearly to the voltage of the internal
+battery - resulting in the robot once again curving as the maximum speed of
+the robot slowed.
+
+While it was not possible to implement a reliable dead-reckoning
+system on the physical robot, there was still potential for the estimated
+localisation to function correctly within the perfect conditions of the
+simulated environment, and thus development moved to the next stage of the
+SLAM problem.
+
+\subsubsection{Obstacle Observation}
+To be a valid SLAM solution, a robotic agent is required to observe the
+environment around its self in order to identify landmarks or features which
+can be utilised by the robot to localise its self in the global environment.
+
+As outlined in the REF-TOOLS-SECTION!, the Thymio II robot featured five
+forward facing infrared sensors, with a documented effective range of \~{}10cm.
+Preliminary experimentation was conducted to verify that the Thymio's
+documentation was accurate.
+Investigation revealed that the operational tolerances of the Thymio's sensors
+was not consistent, with the majority of the infrared sensors only able to
+consistently detect objects within a range of \~{}6-8cm.
+The extremely limited range of the sensors made the task of object detection
+excessively complex, as a robot would not be able to observe environmental
+features without moving within close proximity of a map obstacle.
+The short range of the sensors also limited the execution of the third SLAM
+solution step; the updating of the agent's map.
+
+\subsubsection{Map Update}
+The final step of this projects proposed SLAM solution was to update the
+robotic agent's approximated map of the environment.
+The process of updating a map consisted of two steps; determining if the
+obstacle currently being observed was already recorded in the map, and in cases
+where the obstacle has not been recorded, adding the new features to the map -
+using previously identified landmarks as references. 
+As previously stated, the Thymio II's extremely limited sensor capabilities
+made the implementation of the map updating task practically impossible.
+
+In order to correctly add new features to the internal map, a robotic agent
+must first determine where the obstacle exists in a global context.
+This is achieved by the robot utilising its sensors to locate the position
+and distance of a previously observed map feature, and calculating the new
+feature's distance from this known location.
+The robot can then utilise the result of this calculation to add the estimated
+location of the new feature to the approximated map.
+
+Due to the Thymio II's sensors possessing a maximum effective range of around
+6cm, the robot would not be able to accurately determine the location of an
+obstacle that was placed more \~{}12cm away from any other environment feature.
+
+An environment containing objects dispersed no more the 12cm away from one
+other would be extremely impractical to testing a Thymio II SLAM solution:
+\begin{itemize}
+\item The close proximity of the obstacles would complex the process of
+differentiating new features from previously observed features.
+\item The Thymio II's dimensions measure 11cm by 11.2cm, making navigation of
+\~{}12cm paths extremely difficult, to borderline impossible - due to the
+unreliability of the Thymio's wheel motors.
+\end{itemize}
+
+As was the case of dead-reckoning, neither obstacle observation, or map
+updating could be implemented on the physical robot due to constraints of the
+native hardware.
+It is feasible that a simulated implementation of the obstacle observation and
+map updating could be produced, however alterations would first have
+to be made to the simulator in order to increase the range of the artificial
+Thymio II's sensors - which originally matched the documented range of the
+real-world counterpart.
 
 \subsection{Simulator}
 How the simulator was implemented/improved.
