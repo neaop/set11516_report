@@ -20,6 +20,74 @@ Countless systems employing SLAM techniques have been researched and developed
 for multiple domains, including but limited to; self-driving cars, planetary
 rovers, domestic robots, and unmanned aerial and submersible vehicles.
 
+As a concept, SLAM has existed for a substantial period, and as such multiple
+potential solutions to the problem have been developed.
+As previously stated, suitability of SLAM algorithm depends heavily on the,
+environment to be navigated, the available hardware, and the type of map to
+produced - meaning that no single SLAM solution can be considered optimal for
+all permutations of equipment and environmental parameters.
+New SLAM algorithms and solutions are still being theorised and tested, as
+navigation problems remain a key interest of research - both in industry and
+academia.
+
+The SLAM problem can be represented simply in a formulaic manner:
+
+\[ P(m_t,x_t|o_{1:t}) \]
+
+Considering a set of sensors observations \(o_t \), over a number of time
+steps \(t\), the goal of a SLAM solution is to probabilistically calculate an
+estimated map of an environment \(m_t\), and the location of an agent in said
+map \(x_t\).
+
+While simple to describe, the SLAM problem requires significantly more
+involved techniques to provide a satisfactory solution.
+
+\subsubsection{SLAM Algorithms}
+While a wide range of potential solutions to the problem of SLAM exist, most
+solutions can be broken down into three distinct steps \cite{Sola2013}. 
+A concise definition of each step is provided:
+
+\begin{itemize}
+\item The robot moves, reaching a new point of view of the scene. 
+Due to unavoidable noise and errors, this motion increases the uncertainty on
+the robot’s localization.
+An automated solution requires a mathematical model for this motion. We call
+this the motion model.
+
+\item The robot discovers interesting features in the environment, which need
+to be incorporated to the map. 
+We call these features landmarks. 
+Because of errors in the exteroceptors sensors, the location of these
+landmarks will be uncertain.
+Moreover, as the robot location is already uncertain, these two uncertainties
+need to be properly composed. 
+An automated solution requires a mathematical model to determine the position
+of the landmarks in the scene from the data obtained by the sensors. 
+We call this the inverse observation model.
+
+\item The robot observes landmarks that had been previously mapped, and uses
+them to correct both its self-localization and the localization of all
+landmarks in space.
+In this case, therefore, both localization and landmarks uncertainties
+decrease.  
+An automated solution requires a mathematical model to predict the
+values of the measurement from the predicted landmark location and the robot
+localization. 
+We call this the direct observation model.
+\end{itemize}
+
+The combination of the three previously defined models and `estimation engine'
+\cite{Sola2013} allow an agent to approximate its own location and the features
+of the surrounding  area.
+There exist multiple implementations of estimation engines, one of the most
+commonly utilised systems is the Extended Kalman Filters (EKF) \cite{4378854}
+- often consider the most accurate forms of non-linear estimation
+  \cite{1271397}, and heavily utilised in systems like GPS and guidance
+  systems.
+An alternative estimation engine to EKF is the Particle Filter, a more
+computational expensive Monte Carlo implementation mainly utilised in
+filtering problems \cite{Bugallo2007}.
+
 \subsubsection{Origins}
 The preliminary investigation into SLAM and SLAM solutions was conducted by
 R.C. Smith and P. Cheeseman in 1986 with their exploration of the concept of
@@ -48,9 +116,9 @@ Smith and Cheeseman's later work with M. Self focused on the concept of
 representing spatial information in a `Spatial Map', and the probabilistic
 manners in which the map could be constructed, read, and revised as new
 information of the environment was gained \cite{Smith1988}.
-The motivation behind \citeauthor{Smith1988}'s paper was to aid mobile robots
-navigate an environment, without the need of extremely precise and expensive
-sensors, or known fixed calibration locations in the area.
+The motivation behind the study was to aid mobile robots navigate an
+environment, without the need of extremely precise and expensive sensors, or
+known fixed calibration locations in the area.
 The study discusses how the use of inexpensive, overlapping sensors could be
 used in the stead of more advanced sensors, provided that the uncertainty of
 each sensors measurements were combined when said measurements were utilised
@@ -59,7 +127,7 @@ The paper goes on to make the argument that when utilising inexpensive mobile
 robots that overlapping low quality sensors may be one of the only ways to
 implement a navigation solution of sufficient operational accuracy.
 A simple description of the proposed techniques is described in the paper, and
-bears many resemblances to modern SLAM solutions:
+bears many resemblances to the modern SLAM solution steps:
 
 \begin{itemize}
     \item The robot senses object \#1.
@@ -99,50 +167,8 @@ navigation has been credited as bringing SLAM into public focus, promoting
 further development and utilisation of SLAM solutions in navigation based
 applications. REF here!
 
-\subsubsection{SLAM Algorithms}
-As a concept, SLAM has existed for a substantial period, and as such multiple
-potential solutions to the problem have been developed.
-As previously stated, suitability of SLAM algorithm depends heavily on the,
-environment to be navigated, the available hardware, and the type of map to
-produced - meaning that no single SLAM solution can be considered optimal for
-all permutations of equipment and environmental parameters.
-New SLAM algorithms and solutions are still being theorised and tested, as
-navigation problems remain a key interest of research - both in industry and
-academia.
 
-The SLAM problem can be represented simply in a formulaic manner:
-
-\[ P(m_t,x_t|o_{1:t}) \]
-
-Considering a set of sensors observations \(o_t \), over a number of time
-steps \(t\), the goal of a SLAM solution is to probabilistically calculate an
-estimated map of an environment \(m_t\), and the location of an agent in said
-map \(x_t\).
-
-While simple to describe, the SLAM problem requires significantly more
-involved techniques to provide a satisfactory solution.
-
-Statistical approaches to SLAM problems are common, specifically {\bf Monte
-Carlo} methods - an approach suggested by \citeauthor{Smith1986} in their
-preliminary exploration of the field.
-Monte Carlo methods are algorithms that operate by repeatedly collecting
-random samples in order to generate a probabilistic estimate.
-Two of the more common approaches to SLAM problems that utilise Monte Carlo
-techniques are {\bf Kalman Filters} and {\bf Particle Filters}.
-
-`SLAM for Dummies' is a tutorial paper that describes the process of
-implementing an Extended Kalman Filter based solution to the SLAM problem
-\cite{Riisgaard2004}.  
-The title of the paper belies the through and involved process the authors
-took to fully document the hardware, tools, and techniques utilised -
-providing a fully fleshed and informative guide to implementation of a fully
-functional SLAM solution.
-\citeauthor{Riisgaard2004}'s paper was paramount to the inception and
-development of this project, providing much needed context and explanation to
-much of the domain specific terminology utilised by other studies in the
-domain.
-
-\subsubsection{Inexpensive Robots}
+\subsection{Inexpensive Robots}
 The early research into SLAM solutions, and mobile robot navigation in general
 had a strong focus on producing suitable methods that did not require
 extravagant, expensive, or niche hardware to function.
@@ -165,13 +191,13 @@ that a robot moves across to estimate the robot's location.
 A 2016 study proved that it was indeed possible for a robot to be able to
 localise itself utilising infrared sensors to detect the grey-scale colour of
 the ground beneath the robot and approximate dead-reckoning \cite{Wang2016}.
-The system described in the paper utilises a two forms of {\bf Monte Carlo}
+The system described in the paper utilises a two forms of  Monte Carlo
 method to aid in determining the robot's location.
 The paper described how robotic agents moving over a well defined landscape -
 in the case of the study; A2 size patterns were used, could utilise
 their low-performance sensors to detect the colour beneath themselves and
 calculate their approximate position.
-While the premise and results of the paper were promising, the robtic agents
+While the premise and results of the paper were promising, the robotic agents
 required the robotic agents to have prior knowledge the area in which they
 were localising - providing a solution for only half of the SLAM problem.
 While not a complete solution to SLAM, the paper does show that at least
@@ -194,15 +220,15 @@ The 7 infrared sensors were equally spaced around the forward facing half of
 the circular robot - and the robot's built in odometry provided an estimated
 location for the robot once it had moved from it's random initial starting
 location.
-In terms of the implemented algorithm, a {\bf Line Feature} SLAM solution was
-developed - line based SLAM solution limit the mobile robot's movements to
+In terms of the implemented algorithm, a  Line Feature SLAM solution was
+developed - line based SLAM solutions limit the mobile robot's movements to
 consist of straight, orthogonal, and parallel lines.
 While the forced geometric movements of the robots in the study limited the
 exploration potential of the system, it provided ample navigation of a typical
 room layout - ideal for domestic platforms, such as the one utilised in the
 study.
-An {\bf Extended Kalman Filter} model was utilised to calculate feature
-distance estimations and measurement uncertainties.
+An EKF model was utilised to calculate feature distance estimations and
+measurement uncertainties.
 Tests indicated that the  robot was able to successfully navigate a 4x4 meter
 room containing free standing and wall contact obstacles.
 Considering the robot's effective sensor range only reached ~37\% of the rooms
@@ -216,11 +242,40 @@ localisation (dead-reckoning, or isometry) can lead to successful SLAM solution
 implementations.
 
 
-\subsection{Routing Problems}
+\subsubsection{SLAM Implementations}
+SLAM algorithms have been proven to be effective solutions to the problem
+autonomous navigation, and have been utilised in a wide array of applications
+and systems.
 
-\subsection{Robotic Simulators}
+Recent intrest in the concept of autonomous or self-driving cars has
+re-establish SLAM as a `hot-topic' in terms of research.
 
 
+\subsection{Robotic Simulation}
+Robotic simulators, and simulators in general, provide the ability to design
+and test a  systems behaviour, outwit the system itself. 
+Simulators have long been empolyed, as the recouse and time cost of a project
+can be significnatly reducded - particulary in projects that would otherwise
+utilse exspsensive or niche hardware requirements.
+
+While a simulator's resource saving advantages are obvious, there exists other
+benfits to employing the use of a simulation software - particularly in
+robotic themed projects.
+One such advanatge is a simulators potential to generate sample data that can
+be used in the training or evaluation of genetic or evolutionary robotic
+systems.
+A number of studies have concluded that the use of robotic simulators can
+aid in the improvement of robots that employ non-deterministic behaviour
+\cite{7139550,7139557}.
+This claim was found to be epically true in studies concerning swarm robotics
+- a domain that focuses on the use of multiple agents working together to solve
+a single problem \cite{Wischmann864,R2016,Yao2014}
+
+Utilising a simulator to aid in the training of robots is not a new concept,
+but advancements in computational power and the parallel execution of
+simulators has the potential to drastically reduce the time required to evolve
+robotic behaviour and approximate solutions to problems encountered by robotic
+agents.
 
 \pagebreak
 
