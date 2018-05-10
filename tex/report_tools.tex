@@ -21,12 +21,37 @@ and two ground facing), with an approximate range of 10cm.
 \item 2.4GHz wireless module.
 \item 3.7V, 1500mAh, Li-Po rechargeable battery.
 \end{itemize}
-Full specification of the Thymio robot is visible REF-HERE!
+Full specification of the Thymio II is visible at Tymio's website
+\cite{thymio}.
 
 While the robot's cost point and accessibility were ideal for this
 experimentation, there did exist a number of concerns in regards to Thymio
 II's hardware capabilities.
 
-A major concern was the robot's lack of proprioceptive sensors - sensors that
-a robotic agent can utilise to detect how far, or at what angle it has been
-moving.
+A major concern was the robot's lack of proprioceptive or odometric sensors -
+sensors that a robotic agent can utilise to detect how far, or at what angle
+it has moved.
+A common odometry implementation is the use of rotary encoders on a robotic
+agent's wheel.
+The encoders can calculate the stance that the robot has travelled based on
+the circumference of the wheels, and the number of rotations the wheels have
+made.
+While odometers is not required for the implementation of a SLAM solution, the
+approximated localisation can significantly reduce the complexity of the
+overall system.
+
+
+The second major concern in regards to the Thymio II' specification was the
+operational range of its infrared sensors.
+Exteroceptive sensors, or external state sensors detect the environment around
+them.
+There are a range of such sensors that can be utilised in SLAM solutions,
+including but not limited to; laser scanners, ultrasonic sensors, infrared
+detectors, and cameras.
+A mobile exteroceptive sensor is the minimum requirement to implement a SLAM
+solution, however the operational accuracy and range of said sensor can
+greatly alter the challenge of implementation.
+The Thymio II's detection of range of 10cm was concerning, but a number of
+localisation and navigation studies had been conducted previously, utilising
+the Thymio II, lessening the initial alarm in regards to the sensors fidelity
+\cite{Wang2016}.
