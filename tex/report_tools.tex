@@ -10,11 +10,19 @@ A key concept of this study was the implementation of a SLAM solution
 utilising inexpensive or primitive hardware components.
 A Thymio II wireless robot was utilised for the implementation and testing of
 the project's SLAM solution.
+
+The Thymio robots are a range of mobile robot products, designed to aid in the
+education.
+While aimed at younger audiences, the Thymio robots feature a range of
+sensors and actuators that make them viable for a range of projects -
+including research scenarios.
+
 The Thymio II was chosen for this project due to its cost (typically available
 for under £150) and its availability  - Edinburgh Napier University had
 previously used the Thymio robots in a previous project.
 
-The key features of the Tymio II wireless system are as follows:
+
+The key features of the Thymio II wireless system are as follows:
 \begin{itemize}
 \item Nine infrared proximity sensors (five front mounted, two rear mounted,
 and two ground facing), with an approximate range of 10cm.
@@ -40,18 +48,58 @@ While odometers is not required for the implementation of a SLAM solution, the
 approximated localisation can significantly reduce the complexity of the
 overall system.
 
-
-The second major concern in regards to the Thymio II' specification was the
+The second major concern in regards to the Thymio II's specification was the
 operational range of its infrared sensors.
-Exteroceptive sensors, or external state sensors detect the environment around
+Exteroceptive or external state sensors detect the environment around
 them.
-There are a range of such sensors that can be utilised in SLAM solutions,
+Their are a range of such sensors that can be utilised in SLAM solutions,
 including but not limited to; laser scanners, ultrasonic sensors, infrared
 detectors, and cameras.
 A mobile exteroceptive sensor is the minimum requirement to implement a SLAM
 solution, however the operational accuracy and range of said sensor can
 greatly alter the challenge of implementation.
 The Thymio II's detection of range of 10cm was concerning, but a number of
-localisation and navigation studies had been conducted previously, utilising
-the Thymio II, lessening the initial alarm in regards to the sensors fidelity
-\cite{Wang2016}.
+localisation and navigation studies had been conducted previously
+\cite{Wang2016}, utilising the Thymio II, lessening the initial alarm in
+regards to the sensors fidelity.
+
+By default, the Thymio II's behaviour can be augmented by implementing
+new systems in a bespoke programming language; Aseba.
+The Aseba language's syntax bears many similarities to the Pascal and
+Matlab languages - however it has been significantly simplified in order to
+accommodate younger audiences.
+Fortunately, the Thymio robots can support other programming languages,
+assuming said language supports the D-Bus protocol - a low-level communication
+system.
+By choice of the project developers, it was opted that development of the
+robot's behaviour software would be implemented in Python 2 - mainly due
+familiarity with the language.
+
+\subsection{Robot Simulator}
+As one of the primary goals of this study was to evaluate the effectiveness of
+robotic simulators, a stipple simulation software had to selected.
+Fortunately, the Thymio robots are compatible with a existing simulation
+service; Aseba Playground \cite{aseba-community}.
+
+Aseba Playground provides a real-time, three dimensional rendering of
+customisable environment, and allows a simulated Thymio robot to navigate,
+sense, and interact with said environment - utilising the same sensor and
+actuator configurations present on the real-world robot.
+
+While not all features of the real-world robot are implemented within the
+simulator, the ones required to implement a SLAM solution are provided, namely;
+
+\begin{itemize}
+\item The horizontal infrared detectors.
+\item The wheel speed controls.
+\end{itemize}
+
+The Aseba simulator has been developed in C++, and is available under the GNU
+Lesser General Public License, meaning the source-code can be viewed and
+edited without finical commitment.
+
+While the default configuration of Ababa Playground is quite computationally
+expensive - mainly due to the visual rendering of environments and robots, the
+availability of the source-code means it is feasible to reduce the
+computational load of the application, and potentially allow integration with a
+robotic agent.
