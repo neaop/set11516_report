@@ -1,8 +1,62 @@
 \section{Evaluation}
-\editnote{How the effectiveness of the project was consider.}
+This section of the report aims to  discuss and describe the information that
+can be gained from the results goatherd in the previous section.
+Evaluation of results is a critical step in determination of susses of a
+study, and ultimately answering the research question originally posed in
+Section \ref{sec_res_q}.
 
 \subsection{Robot}
-\editnote{Discuss weakness of Thymio ?}
+Due to short comings of the Thymio II platform described in Section
+\ref{meth_slam}, it was not possible to implement the required subtasks or
+models needed to produce a valid SLAM solution.
+As a result of this lack of implementation, it is not possible to provide a
+formal evaluation of the system.
+
+While the evaluation  of the SLAM implementation is not possible, it is still
+possible to discuss the metrics that may have been utilised to quantify the
+SLAM implementation.
+
+As per previous studies conducted in the field of autonomous navigation, one of
+the most common metrics of evaluation is a simple comparison of the robot's
+estimated location of map features and itself, and the physical location of
+said features.
+It is crucial to remember that SLAM solutions are approximation techniques,
+and as such a certain degree of error is expected within an robot's
+estimations.
+
+A second common metric or evaluation SLAM solutions is to measure the time
+take for a robotic agent to map a certain percentage of an environment, or to
+find a number of specific landmarks within said environment.
+Timed metrics are often an unreliable evaluation technique, as robotic agents
+can produce artificially high results with low accuracy SLAM solutions, by
+simply moving at a faster speed through an environment.
+
+Much like a SLAM solution itself, the techniques utilised in the evaluation of
+an implementation must be tailored to system, the sensors utilised, the manner
+of estimation, the type of map produced, and the specification of the robot.
+
+One of the two sub-queries posed as a research question for this study was:
+\begin{quote}
+``Is it possible to implement a SLAM solution using a robot with limited or
+primitive hardware?''
+\end{quote}
+While this study's inability is indicative of a negative answer to this
+question, much of the literature reviewed in Section \ref{sec_slam} reveals
+that implementation of SLAM solutions on primitive robotic platforms is in
+fact possible.
+
+In hindsight the original sub-query can be consider vague or leading, a more
+suitable research question would have been:
+
+\begin{quote}
+``What are the hardware limitations to implementing a SLAM solution on a
+mobile robotic platform?''
+\end{quote}
+
+While this revised research query cannot be answered by the results gained by
+this study, it is certainly a more appropriate question, and a suitable topic
+for a future investigation.
+
 
 \subsection{Simulator}
 \subsubsection{Memory Consumption}
