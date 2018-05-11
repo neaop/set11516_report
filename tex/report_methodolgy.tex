@@ -11,6 +11,22 @@ this project consisted of two distinct development tasks:
 Due to the loose coupling of the simulator and the SLAM implementation, each of
 the development tasks could be conducted in parallel by individual project
 members.
+
+Overall, the project consisted of three parts:
+\begin{itemize}
+    \item The robot control code, implementing SLAM and other behaviours
+        on top of it.
+    \item A simulator based on Aseba Playground, but reduced in size and
+        resource consumption to allow faster or parallel execution.
+    \item The Thymio II robotic platform to be controlled.
+\end{itemize}
+By maintaining a common and known interface shared by the Thymio II and the
+simulator, the SLAM software could be tested and executed against the simulator
+and the Thymio itself identically, meaning that no additional support, or glue,
+code would be required that may distort results between what are observed on
+the simulator and in real life. In essence, the control code cannot ever
+identify the difference between the two.
+
 The methodology and development techniques of each deliverable is detailed
 below.
 
@@ -117,7 +133,7 @@ To be a valid SLAM solution, a robotic agent is required to observe the
 environment around its self in order to identify landmarks or features which
 can be utilised by the robot to localise its self in the global environment.
 
-As outlined in the REF-TOOLS-SECTION!, the Thymio II robot featured five
+As outlined in the \editnote{REF-TOOLS-SECTION!}, the Thymio II robot featured five
 forward facing infrared sensors, with a documented effective range of \~{}10cm.
 Preliminary experimentation was conducted to verify that the Thymio's
 documentation was accurate.
@@ -172,4 +188,90 @@ Thymio II's sensors - which originally matched the documented range of the
 real-world counterpart.
 
 \subsection{Simulator}
-How the simulator was implemented/improved.
+As stated, the aim of the simulator modifications was to reduce the resource
+consumption and increase the speed of the simulator, to allow more strategies
+or behaviours to be tested before execution on the physical robot platform.
+
+To this end, the source code for the Aseba Playground was inspected to
+understand its structure, makeup, bottlenecks, and pliability to the project
+aims. After some time analysing the system and benchmarking it's performance,
+it was determined that the large Qt GUI application was unsuitable to be pared
+down. Instead, it would be deconstructed into it's component parts, and a new
+simulator and set of tools built in its place.
+
+Although the new simulator would differ internally, it was important that the
+implementation would replicate still the same outward interfaces of the
+playground, but also that of the robot. In doing so, the simulator would be a
+drop in replacement for these other components, meaning that the SLAM control
+code would not need different modes or interfaces to talk to the robot than it
+did to the simulator. This would be advantageous if the project were to advance
+down other methods of control, such as evaluating behaviours programmatically,
+where the measured outcomes would be based on the result of the simulation, as
+though to the control code it was actually functioning in the real world.
+
+With this in mind, the each of the components identified previously were
+considered for their necessity in a new, minified simulator. Of these that were
+considered vital, their size and complexity was also evaluated, and where
+possible, replaced with a smaller implementation expressing the same interface.
+The total architecture with the Playground is shown below. \editnote{Full
+diagram goes here}.
+
+Ultimately, the following components were kept, in part, or by reimplementation:
+\begin{itemize}
+    \item Physics engine - kept in full
+    \item Agent engine - only the Thymio II agent retained
+    \item Networking components - reimplemented minimally, implementing the
+        Medulla switch interface.
+\end{itemize}
+The GUI was excluded, as visual output was not required. Additionally, much of
+the support code, such as that used to load image files for graphical world
+representation was also dropped.
+
+As a result, the new simulator architecture was as follows: \editnote{Minimal
+implementation diagram}
+
+The paring down of the simulator reduces the CPU resources consumed. As a result
+more instances can be executed in parallel. Additionally, for a given segment of
+time, less work needs to be done, allowing the code to execute more quickly. It
+also reduces the memory consumption to host the simulator, again allowing more
+instances to be hosted and executed simultaneously.
+
+One of the options available to help accelerate the simulation would be to to
+use a GPU. As simulations of physics can be highly numeric, such as the
+calculation of gravity or accelerations on many instances of physics agents,
+it was possible that GPU acceleration would be effective in reducing the time
+repeating many simple calculations. If much of the CPU use in the simulator was
+dominated by this type of code, then it would be effective.
+
+In order to investigate this, the minimised but CPU-only simulator was
+internally instrumented and its call graph and the time spent in various parts
+of the code checked. If high amounts of time were spent in the physics loops,
+then offloading these parts to a GPU would greatly speed up the simulation. In
+fact, most of the time in physics-rich environments was spent in simple memory
+management routines, adding, removing, and testing for objects in the arrays
+used to store and track the objects. This lack of suitability to GPU
+acceleration was a major blow to the intentions to speed up individual
+instances, one of the main strategies considered alongside the parallelisation
+of whole instances.
+
+\editnote{Phyics-sparse call graph}
+\editnote{Physics-rich call graph}
+
+Once the implementation of a trimmed down simulation was complete, it was
+measured for CPU consumption at the steady-state, for steady-state RAM
+consumption, and simulation speed ratio - that is, how fast the simulation can
+execute.
+
+To measure the simulation speed ratio, the simulator is set to run for a fixed
+span of simulated time - in this instance 10 seconds. The time taken to then
+complete this time span is measured. 100 recordings of this regime are made,
+and the first and last 10 measurements are discared to discount cache warming.
+The remaining 80 measurements are then averaged, and the simulated timespan is
+divided by the time taken to execute. The resulting number is the simultion
+speed ratio, the number of simulated seconds per execution second.
+
+For steady-state CPU and memory consumption, the simulation instead runs at a
+fixed ratio (1:1, as a fair comparison with the Playground), and the CPU and
+RAM consumption measured 10 times each over 10 executions. As before, the first
+and last measurements in each are discarded, and the remaining central 80\%
+are averaged.
