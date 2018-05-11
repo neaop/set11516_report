@@ -77,7 +77,7 @@ familiarity with the language.
 
 \subsection{Robot Simulator}
 As one of the primary goals of this study was to evaluate the effectiveness of
-robotic simulators, a stipple simulation software had to selected.
+robotic simulators, a stipple\editnote{???} simulation software had to selected.
 Fortunately, the Thymio robots are compatible with a existing simulation
 service; Aseba Playground \cite{aseba-community}.
 
@@ -96,10 +96,27 @@ simulator, the ones required to implement a SLAM solution are provided, namely;
 
 The Aseba simulator has been developed in C++, and is available under the GNU
 Lesser General Public License, meaning the source-code can be viewed and
-edited without finical commitment.
+edited without financial commitment.
 
-While the default configuration of Ababa Playground is quite computationally
+While the default configuration of Aseba Playground is quite computationally
 expensive - mainly due to the visual rendering of environments and robots, the
 availability of the source-code means it is feasible to reduce the
 computational load of the application, and potentially allow integration with a
 robotic agent.
+
+The Aseba simulator is modular and the Playground comes as a collection of
+several parts interconnected into a larger whole.
+
+In particular, the following parts were of interest to this project:
+\begin{itemize}
+    \item The physics engine, which simulates the world as a whole, testing for
+        collisions and tracking the locations and motion of agents within the
+        simulation.
+    \item The agent engine, which represents the robots both to the physics
+        engine, and also their capabilities and sensing systems to systems that
+        would seek to direct them.
+    \item The GUI, which presents to the user an interface to control the
+        simulation, as well as observe the results.
+    \item Networking components, which present an interface for remote
+        control of the simulation and the agents within it.
+\end{itemize}
