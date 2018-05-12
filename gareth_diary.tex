@@ -1,0 +1,171 @@
+\documentclass[a4paper]{article}
+
+\begin{document}
+
+\begin{titlepage}
+    \title{Advanced Software Teamworking Diary}
+    \author{Gareth Pulham, 40099603}
+    \maketitle
+    \thispagestyle{empty}
+\end{titlepage}
+
+\section{WC 2017-09-04}
+    Had our first lecture this week, brief run down of module aims and objectives.
+    Made Slack team and started inviting people in.
+\section{WC 2017-09-11}
+    Linked 5/10 ideas a day blog. With some luck we can find some inspiration or at least get people thinking about
+    what's worth doing. While some are pretty good, some are trash, and most aren't really things that we can form into
+    a full project.
+\section{WC 2017-09-18}
+    Possible ideas:
+    \begin{itemize}
+        \item Consumer ready IndieWeb platform, perhaps with containerised hosting system. Not just ASTW, but also a
+            potential business concept.
+        \item Procedural building generator. Combine with city/dungeon generators to build some kind of interesting
+            maps. This might be something Michael has some interest in? Would be cool to work in a York collaboration.
+    \end{itemize}
+\section{WC 2017-09-25}
+    At this point Sally has asked us to really think about ideas, as it's all dragging on a bit without any seeming
+    forward progress. I don't really blame here, most people I don't think have developed many ideas.
+    Possible ideas that I'd be quite keen to do. A little more technical than before:
+    \begin{itemize}
+        \item Genetic programming for ICWS94/Redcode, automatically constructing and evaluating warriors
+        \item Genetic algorithm for robots of some kind
+    \end{itemize}
+    At this point formed a team with Sam + Angelos, as we're all most intersted in the more technical side rather than
+    the mobile stuff the rest of the class are moving towards.
+\section{WC 2017-10-02}
+    General negotiation with teammates to see team shimmy, Angelos I think feels it's a bit too theory.
+\section{WC 2017-10-09}
+    Project idea is pretty much confirmed. We're going to see if we can develop some robot strategies genetically to
+    solve problems. Given the hardware, it would be really decent to build some strap-down unit that can go atop a robot
+    like Rasmus had with the RPi's to do this. Kevin has talked about some Nvidia GPU dev boards that might be handy
+    since we'll probably need some simulation oomph.
+\section{WC 2017-10-16}
+    Sam and I had a chat with Emma Hart about multiobjective GAs. Given we want a bit of depth to the GA side, it would
+    be cool to consider multiple different outcomes to a robot being dropped into theatre. Given these different
+    possible outcomes, develop a winning strategy for each. Aside from being interesting, it gives some real simulation
+    fodder to show off any acceleration we can get with the simulators.
+\section{WC 2017-10-23}
+    Research into Rasmus' work with his project. The software he's been using is mostly all Aseba stuff, so I'm not sure
+    if it's all vendor locked or what.
+
+    Thymio II seems a cool thing, but not well documented generally. It's unclear how it can be driven from outside
+    their own environment, and certainly there's a dearth of information on what methods/properties can be driven. For
+    example, even for driving the wheels it's not clear what the range is that can be used for minimum and max speed,
+    and how the units used equate to real-life speed.
+\section{WC 2017-10-30}
+    Research into SLAM and dead reckoning. This is going to be Sam's ``responsibility'', but it's useful to have a base
+    level of knowledge to keep up with him, as well as predict a bit of what he's going to need and try to be a bit
+    ahead in planning that into the interfaces provided.
+\section{WC 2017-11-06}
+    Research into enki/aseba/thymio project structure.
+
+    The project basically consists of a few different parts:
+    \begin{itemize}
+        \item Aseba is the overall project, covering the Thymio's, the simulation env, etc
+        \item Playground is a 3D rendered project environment
+        \item Core simulation is provided by a small library developed by Aseba called Enki
+        \item The project is broken into clients (controllers) and targets (bots, agents such as the simulator)
+        \item Communication between them all is handled by switches (such as Medulla, which talks DBus on one side and
+            dashel on the other, the protocol that targets natively speak)
+    \end{itemize}
+\section{WC 2017-11-13}
+    Work on and present project pitch. Fairly standard, and stand-up talks have always been my element a bit. I think we
+    did ok. I'm not sure Kevin really ``gets'' the project as most of his questions are basically ``why is it useful to
+    have a sim that can run on robots''. It's a bit frustrating as it's an indication we didn't fully express the need
+    and the goals, but something to work on.
+\section{WC 2017-11-20}
+    Set up local dev environment for Aseba/Enki. It's a bit of a pig, as the requirements aren't fully documented. A
+    small text file exists explaining it, but it's not well matched to reality. Not helping the matter is how it's split
+    across many git repos, but not linked with submodules. To top it off, they're in the process of moving from Qt4 to
+    5, so half the time the master branch doesn't even build anyway.
+\section{WC 2017-11-27}
+    Try and fail to get Medulla (dbus to thymio(sim)) working. There's a fair bit of network shenanigans going on. I can
+    either connect it to the target (simulator) but not the client (ie, talk DBus properly), or vice versa.
+\section{WC 2017-12-04}
+    Exams starting soon, so down tools for a bit and come back to it fresh afterwards.
+
+\section{WC 2018-01-08 Term starts}
+    Pretty happy with progress combined over the holiday and this first week back:
+    \begin{itemize}
+        \item Got medulla working with bot, though still not the simulator
+        \item Investigate medulla dbus protocol - dbus thankfully supports introspection, so it's possible to request a
+            list of all methods, rather than spelunking through the medulla code to find all the endpoints it registers.
+        \item Wrote simple python library for driving medulla over dbus using the above methods
+        \item PS4 controllers have bluetooth, so I can link them to my laptop and read the trigger/stick axes. From this
+            I wrote a small script to take these and apply them to python library to exercise the dbus/medulla
+            interface. It means in essence we can take the robot and start controlling it, even if it's open-loop.
+        \item Wrote a sensor visualisation tool. Aside from helping rationalise the numbers coming out of the sensor
+            list, it also exercises the dbus read interface. With this demonstrated, it's possible to close the loop: we
+            can read sensors, make decisions, and write back actions to actuators and do stuff.
+    \end{itemize}
+\section{WC 2018-01-15}
+    Got medulla working with playground this week. It was all a terrible misunderstanding with what needs to listen to
+    where and on what ports. It's a bit sucky that in the end you need to use nmap to do it though.
+
+    Documenting the medulla dbus interface is useful at this point, as it means Sam can start using SLAM in anger. It'll
+    be possible to set up playground+medulla and for him to then read and write to dbus to close the loop and implement
+    slam in the big simulator. We can then replicate use this same interface when we shrink the sim. Once SLAM works on
+    the sim, we can then swap out the target behind medulla and SLAM can then read/write to the real robot as though
+    nothing changed.
+\section{WC 2018-01-22}
+    John Kerridge has heard about driving over DBus and wants to chat, as he has a student who needs to do the same.
+    When we met later in the week it turns out that his student actually wants to talk dashel, acting in place of
+    medulla and talking directly to the robot from inside Java.
+
+    Sam is quite anxious about the lack of odometry and wants to hack dead reckoning. With the resolution of the sensors
+    so poor, he wants to use a kalman filter to take good-enough dead reckoning and fuse with sensing to fine it up.
+\section{WC 2018-01-29}
+    Deep dive into playground. It's a much bigger codebase than I imagined, and it's not clear how it's all put
+    together. Mostly, instead of things actually being compositioned together in larger systems from classes, everything
+    just kind of ends up in nested C++ namespaces and they just talk to each other implicitly. It probably makes decent
+    sense with some design documents showing where everything lives, but I certainly can't find it online.
+\section{WC 2018-02-05}
+    As it turns out, Playground is a bit of a nightmare. It's pretty tightly stuck together at this level and I don't
+    think it's going to be possible to cleanly lift the GUI off. Thankfully, Enki, the underlying simulation engine
+    looks like it can be used standalone. The best solution seems to be instead of cutting off bits of playground to
+    make a smaller sim to instead take the simulation engine and instead reimplement or re-add only what I need.
+\section{WC 2018-02-12}
+\section{WC 2018-02-19}
+    Actually extracting what I need is not quite as bad as I expected, mostly it's contained in Enki. Instead of
+    removing the networking component that's unique to Playground, I think I'm going to merge in medulla. As a result,
+    instead of swapping out the target behind Medulla, the interface stops at dbus, and you can either talk dbus to
+    medulla+playground, to talk dbus to a smaller simulator.
+\section{WC 2018-02-26}
+    Sam's quite worried about robot swerve, it's got a bit of a limp to the left that makes dead reckoning hard. Even if
+    the magic numbers he's found are accurate, it's no good if you have some random rotation that mean the straight line
+    you've calculated is an inconsistent curve.
+\section{WC 2018-03-05}
+    Discussed with Sam some options for calibrating the swerve. None of them really seem to fit as you need a known
+    environment which is something we've explicitly excluded. What's the need to SLAM if you already know where you are
+    and have a calibrated ground plane?
+\section{WC 2018-03-12}
+    Minimal Enki simulator is building at this point but not yet checked for validity or how it can compare against
+    playground.
+\section{WC 2018-03-19}
+\section{WC 2018-03-26}
+    Discussed about some god methods in the sim, as Sam isn't happy with how the real life robot works. In essence, the
+    real life robot is quite limited, so for the sake of getting a working SLAM model, can we just cheat and ask the
+    physics engine to just tell us the position without metrics? It'd work, but doesn't help us with the end goal,
+    however, it would at least be an excellent way to validate the core concepts while giving us an opportunity to talk
+    about the limitations, meaning we could cover both worlds of ``why this is cool and how SLAM works'' as well as
+    ``why this is actually really hard in reality''. We explicitly spoke about the reality gap in our presentation so
+    this would be an excellent showcase for it.
+\section{WC 2018-04-02}
+    Deadline fixed at May 11th
+\section{WC 2018-04-09}
+\section{WC 2018-04-16}
+    Begin report
+\section{WC 2018-04-23}
+    Started to benchmark simulator, it compares pretty well so far just by being so much smaller. I've been looking at
+    how Enki works internally to find any hot physics loops, but it's not good reading. Given it's C++, it's the usual
+    mess of STL containers being super unperformant. With both few physics objects and many, it's spends most of its
+    time futzing about in STL vector management. There's no point trying to speed up physics loops if they only actually
+    consume 10\% of the frame duty cycle when we're going so much faster just by not drawing a lot of pixels to screen.
+\section{WC 2018-04-30}
+    Reporting
+\section{WC 2018-05-07}
+    Reporting, diagrams, etc
+
+\end{document}
