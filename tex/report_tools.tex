@@ -1,7 +1,6 @@
 \section{Tools and Technologies}
-%List and discuss the hard/software utilised in the project.
 As is the case with many hardware centric studies, the choice of technologies
-utilised by a project can drastically alter it outcome.
+utilised by a project can drastically alter its outcome.
 This project utilised a range of technologies and tools to implement the
 proposed system, the details of which are provided here.
 
@@ -18,8 +17,8 @@ sensors and actuators that make them viable for a range of projects -
 including research scenarios.
 
 The Thymio II was chosen for this project due to its cost (typically available
-for under \pounds150) and its availability  - Edinburgh Napier University had
-previously used the Thymio robots in a previous project.
+for under \pounds150), and its availability  - Edinburgh Napier University had
+previously used the Thymio robots in a past projects.
 
 The key features of the Thymio II wireless system are as follows:
 \begin{itemize}
@@ -32,18 +31,18 @@ Full specification of the Thymio II is visible at Tymio's website
 \cite{thymio}.
 
 While the robot's cost point and accessibility were ideal for this
-experimentation, there did exist a number of concerns in regards to Thymio
+investigation, there did exist a number of concerns in regards to Thymio
 II's hardware capabilities.
 
 A major concern was the robot's lack of proprioceptive or odometric sensors -
 sensors that a robotic agent can utilise to detect how far, or at what angle
 it has moved.
 A common odometry implementation is the use of rotary encoders on a robotic
-agent's wheel.
-The encoders can calculate the stance that the robot has travelled based on
+agent's wheels.
+The encoders can calculate the distance that the robot has travelled based on
 the circumference of the wheels, and the number of rotations the wheels have
 made.
-While odometers are not required for the implementation of a SLAM solution, the
+While odometry is not required for the implementation of a SLAM solution, the
 approximated localisation can significantly reduce the complexity of the
 overall system.
 
@@ -51,7 +50,7 @@ The second major concern in regards to the Thymio II's specification was the
 operational range of its infrared sensors.
 Exteroceptive or external state sensors detect the environment around
 them.
-Their are a range of such sensors that can be utilised in SLAM solutions,
+There are a range of such sensors that can be utilised in SLAM solutions,
 including but not limited to; laser scanners, ultrasonic sensors, infrared
 detectors, and cameras.
 A mobile exteroceptive sensor is the minimum requirement to implement a SLAM
@@ -67,12 +66,12 @@ new systems in a bespoke programming language; Aseba.
 The Aseba language's syntax bears many similarities to the Pascal and
 Matlab languages - however it has been significantly simplified in order to
 accommodate younger audiences.
-Fortunately, the Thymio robots can support other programming languages,
+Fortunately, the Thymio robots can utilise other programming languages,
 assuming said language supports the D-Bus protocol - a low-level communication
 system.
 By choice of the project developers, it was opted that development of the
-robot's behaviour software would be implemented in Python 2 - mainly due
-familiarity with the language.
+robot's behavioural software would be implemented in Python 2 - mainly due to
+the authors familiarity with the language.
 
 \subsection{Robot Simulator}
 As one of the primary goals of this study was to evaluate the effectiveness of

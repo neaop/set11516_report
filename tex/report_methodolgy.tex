@@ -77,7 +77,7 @@ system revealed little usable or adaptable software that could be utilised for
 this project.
 The only code relating to Thymio II estimated location was found in a
 navigation driver plug-in for the Robot Operating System (ROS) - an open-source
-middle-ware for robot control.
+middle-ware for robot control \cite{steph}.
 As the Thymio II used in this study was not utilising ROS as system driver,
 the navigation plug-in could not be implemented directly - but still provided
 significant insight into how the bespoke dead-reckoning could be implemented.
@@ -104,7 +104,7 @@ The Thymio robotic platform's movement operations are controlled by issuing
 commands to change the speed and direction of each wheel individually - by
 setting both wheels to the same speed and direction the robot should move in a
 straight line.
-Experimentation revealed that left wheel of the Thymio II utilised in this
+Experimentation revealed that the left wheel of the Thymio II utilised in this
 project was unable to match the same speed as the right wheel - causing the
 robot to curve leftwards when attempting to move directly forwards.
 The cause for this issue was unapparent, but a number of possible reasons were
@@ -134,8 +134,9 @@ To be a valid SLAM solution, a robotic agent is required to observe the
 environment around its self in order to identify landmarks or features which
 can be utilised by the robot to localise its self in the global environment.
 
-As outlined in Section \ref{tools_robot}, the Thymio II robot featured five
-forward facing infrared sensors, with a documented effective range of \~{}10cm.
+As outlined in Section \ref{tools_robot}, the Thymio II robot featured five,
+horizontal, forward facing infrared sensors, with a documented effective range
+of \~{}10cm.  
 Preliminary experimentation was conducted to verify that the Thymio's
 documentation was accurate.
 Investigation revealed that the operational tolerances of the Thymio's sensors
@@ -182,6 +183,7 @@ unreliability of the Thymio's wheel motors.
 As was the case of dead-reckoning, neither obstacle observation, or map
 updating could be implemented on the physical robot due to constraints of the
 native hardware.
+
 It is feasible that a simulated implementation of the obstacle observation and
 map updating could be produced, however alterations would first have
 to be made to the simulator in order to increase the range of the artificial

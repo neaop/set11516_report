@@ -11,7 +11,7 @@ required to carry out the project.
 
 \subsection{SLAM} \label{sec_slam}
 As previously stated, SLAM is computational problem consisting of the
-completion of the tasks robotic navigation and robotic mapping in parallel.
+completion of the tasks of robotic navigation and robotic mapping in parallel.
 SLAM solutions are often highly tailored to a particular technology,
 environment, or accuracy - and as such are utilised as approximation
 techniques, rather than a perfect resolution.
@@ -21,8 +21,8 @@ for multiple domains, including but limited to; self-driving cars, planetary
 rovers, domestic robots, and unmanned aerial and submersible vehicles.
 
 As a concept, SLAM has existed for a substantial period, and as such multiple
-potential solutions to the problem have been developed.
-As previously stated, suitability of SLAM algorithm depends heavily on the,
+potential solutions to the problem have been developed \cite{Riisgaard2004}.
+As previously stated, suitability of a SLAM algorithm depends heavily on the,
 environment to be navigated, the available hardware, and the type of map to
 produced - meaning that no single SLAM solution can be considered optimal for
 all permutations of equipment and environmental parameters.
@@ -81,7 +81,7 @@ The combination of the three previously defined models and `estimation engine'
 of the surrounding  area.
 There exist multiple implementations of estimation engines, one of the most
 commonly utilised systems is the Extended Kalman Filters (EKF) \cite{4378854}
-- often consider the most accurate forms of non-linear estimation
+- often considered the most accurate forms of non-linear estimation
   \cite{1271397}, and heavily utilised in systems like GPS and guidance
   systems.
 An alternative estimation engine to EKF is the Particle Filter, a more
@@ -97,11 +97,10 @@ Within these works it was reasoned that it would be advantageous for robots to
 be able to estimate their current location relative to objects or obstacles
 within an environment.
 
-An example provided within the seminal study describes being
-able to calculate the probability of a robot being able to pass through a
-door frame, given the robots uncertain location, the uncertain location of the
-door, and the likelihood that the robot's sensors can detect said door
-\cite{Smith1986}. 
+An example provided within the seminal study describes being able to calculate
+the probability of a robot being able to pass through a door frame, given the
+robots uncertain location, the uncertain location of the door, and the
+likelihood that the robot's sensors can detect said door \cite{Smith1986}. 
 The paper goes on to describe how a robot's estimated location grows in
 uncertainty as moves from its initial location, and that by utilising the
 robot's sensors to make relative measurements between objects or features in the
@@ -207,7 +206,8 @@ Informal definitions for each level are provides as follows:
 \item Level 2 - `hands off' - system controls vehicle, but driver must monitor
                 and be ready to intervene.
 \item Level 3 - `eyes off' - driver is not required to monitor operation of
-                system, but may be required to perform some specific driving tasks.
+                system, but may be required to perform some specific driving
+                tasks.  
 \item Level 4 - `mind off' - system can control vehicle entirely, but only
                 within specific locations or circumstances.
 \item Level 5 - `steering wheel optional' - no human intervention required.
@@ -215,6 +215,7 @@ Informal definitions for each level are provides as follows:
 
 The complete J3016 Autonomy Level definitions are visible in Appendix
 \ref{app-sae}. 
+
 
 SLAM implementations can also be found in more readily available products,
 such as robotic vacuum cleaners, and other autonomous  domestic products
@@ -300,8 +301,8 @@ implementations.
 
 
 \subsection{Robotic Simulation} \label{sec_sim}
-Robotic simulators, and simulators in general, provide the ability to design
-and test a  systems behaviour, outwit the system itself. 
+Robotic simulators, and simulators in general, provide the ability for the
+design and testing a  system's behaviour, outwit the system itself. 
 Simulators have long been employed, as the resource and time cost of a project
 can be significantly reduced - particularly in projects that would otherwise
 utilise expensive or niche hardware requirements.
@@ -309,7 +310,7 @@ utilise expensive or niche hardware requirements.
 While a simulator's resource saving advantages are obvious, there exists other
 benefits to employing the use of a simulation software - particularly in
 robotic themed projects.
-One such advantage is a simulators potential to generate sample data that can
+One such advantage is a simulator's potential to generate sample data that can
 be used in the training or evaluation of genetic or evolutionary robotic
 systems.
 A number of studies have concluded that the use of robotic simulators can
