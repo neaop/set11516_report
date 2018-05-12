@@ -2,7 +2,7 @@
 
 \begin{landscape}% Landscape page
 \section{SAE (J3016) Autonomy Levels}\label{app-sae}
-    \centering % Center table
+    %\centering % Center table
 
     \begin{table}[h]
         \centering
@@ -82,4 +82,16 @@
             \caption{The SAE Autonomy Levels for Autonomous Vehicles}
         \end{table}
     \clearpage% Flush page
+
+    \section{Simulator Call Graphs}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{sparse.png}
+        \caption{Call graph profile in sparse physics environments}
+    \end{figure}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{intense.png}
+        \caption{Call graph profile in rich physics environments}
+    \end{figure}
 \end{landscape}

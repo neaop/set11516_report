@@ -213,8 +213,13 @@ With this in mind, the each of the components identified previously were
 considered for their necessity in a new, minified simulator. Of these that were
 considered vital, their size and complexity was also evaluated, and where
 possible, replaced with a smaller implementation expressing the same interface.
-The total architecture with the Playground is shown below. \editnote{Full
-diagram goes here}.
+The total architecture with the Playground is shown below.
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=\textwidth]{playground.png}
+    \caption{Architecture of the Aseba Playground simulator, and its relation
+    to robot control code.}
+\end{figure}
 
 Ultimately, the following components were kept, in part, or by reimplementation:
 \begin{itemize}
@@ -227,8 +232,12 @@ The GUI was excluded, as visual output was not required. Additionally, much of
 the support code, such as that used to load image files for graphical world
 representation was also dropped.
 
-As a result, the new simulator architecture was as follows: \editnote{Minimal
-implementation diagram}
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=\textwidth]{microenki.png}
+    \caption{Architecture of the Microenki simulator, and its relation to
+    robot control code.}
+\end{figure}
 
 The paring down of the simulator reduces the CPU resources consumed. As a result
 more instances can be executed in parallel. Additionally, for a given segment of
@@ -252,10 +261,8 @@ management routines, adding, removing, and testing for objects in the arrays
 used to store and track the objects. This lack of suitability to GPU
 acceleration was a major blow to the intentions to speed up individual
 instances, one of the main strategies considered alongside the parallelisation
-of whole instances.
-
-\editnote{Phyics-sparse call graph}
-\editnote{Physics-rich call graph}
+of whole instances. These call graphs are presented as auxiliary information
+in appendix B.
 
 Once the implementation of a trimmed down simulation was complete, it was
 measured for CPU consumption at the steady-state, for steady-state RAM

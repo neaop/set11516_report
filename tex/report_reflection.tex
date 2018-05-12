@@ -133,4 +133,65 @@ limit the scope of the project to a single domain, or invest in a higher
 quality robotic platform.
 
 \subsubsection{Gareth Pulham}
+% Talk about initial hopes
+When the team was initially formed, we had high hopes about the amount of
+ground we could cover, and our scope was initially very wide. Covering large
+swathes of robotics and performance computing topics, we wanted to cover
+genetic algorithms, robotic task planning, simultaneous localisation and
+mapping, and GPU acceleration of the simulator. The total outcome would be
+a complete system that could be strapped to the top of the Thymio II robots.
+This system would provide SLAM capabilities to build up a picture of its
+environment as well as a high performance GPU accelerated simulator that would
+allow a GA system for evaluating different robotic control strategies. This
+ambition was partly fed by our previous experience in areas related to what we
+wanted to cover. In particular, we had experience in the analysis and
+parallelisation of simulation tasks, as well as genetic approaches to finding
+solutions in spaces such as planning.
 
+% How they panned out
+As we began our research into the theory required for this, as well as into the
+Aseba codebase, it became clear to us that we would have to reduce the scope of
+the project. Underlining this were the committments to other projects and tasks
+academically and extracurricularly that reduced the amount of time we had
+available to dedicate to the project. Fortunately, as our initial plan
+comprised many smaller units of work used together, we could shed the higher
+level components and still produce complete blocks of work that each had useful
+outcomes. As mentioned, the codebase I personally worked on as well offered up
+some surprises. Its structure and style of implementation was new to me and
+it was difficult at first to construct a personal mental model of how the
+Playground worked. Once this had been managed, benchmarking began. It was
+frustrating following this process to find that the performance was not
+ultimately bound by the physics calculations that we had hoped to target for
+GPU acceleration, however, in completing investigation to the structure and
+implementation, it was possible to develop new plans on how to improve the
+performance.
+
+% Concerns if any
+Alongside the technical and logistical barriers that loomed as we moved from
+the initial planning stages to implementation, there were also interpersonal
+concerns. Although I've known Sam for some time, and appreciated the high
+quality of work he had produced in the past, I had not worked directly with him
+before in an academic environment. In practice this academic partnership worked
+out well, and it was clear why Sam is regarded by his peers as an excellent
+partner. His academic mindedness and research capability was a huge asset to
+the project and I do not think that the outcomes acheived would be possible
+with anyone else.
+
+% Practical outcome
+Those outcomes were ultimately something I think we can each be proud of. While
+we didn't cover the same broad areas we started off hoping to, we were able to
+realistically assess what we could produce and instead of spreading ourselves
+too thin and producing a lower quality of work, we were able to focus on a
+smaller number of topics in depth and at high quality.
+
+% If I could do it again
+If I were able to begin this project again from scratch, I would seek to reduce
+the initial scope. The ambitions of the project to begin with were very high,
+and while I think it was a useful exercise to be able to research and replan as
+our understanding of the project landscape improved, I hope that it's possible
+to use it to improve my estimation abilities and in future be closer in my
+initial plan to the final outcome. I think that not just is this a useful
+academic skill, allowing a researcher to more closely focus his efforts and
+work in depth on what is a reasonable amount of work, I also think it will turn
+out to be a useful skill in the workplace to be able to more accurately guage
+the length of time assigned tasks might take.
