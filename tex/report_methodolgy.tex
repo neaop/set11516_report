@@ -12,7 +12,8 @@ Due to the loose coupling of the simulator and the SLAM implementation, each of
 the development tasks could be conducted in parallel by individual project
 members.
 
-Overall, the project consisted of three parts:
+Overall, this resulted in a project consisting of three components working
+together:
 \begin{itemize}
     \item The robot control code, implementing SLAM and other behaviours
         on top of it.
@@ -72,7 +73,7 @@ studies, including SLAM solutions that utilise dead-reckoning, the Thymio II
 system does not include dead-reckoning `out-of-the-box' and thus a bespoke
 implementation had to be developed.
 Investigation into previous implementations of dead-reckoning on a Thymio
-system reviled little usable, or adaptable software that could be utilised for
+system revealed little usable or adaptable software that could be utilised for
 this project.
 The only code relating to Thymio II estimated location was found in a
 navigation driver plug-in for the Robot Operating System (ROS) - an open-source
@@ -86,11 +87,11 @@ robot had a speed coefficient - or hypothetical speed of 2.93.
 Ad hoc experimentation using the Aseba simulator revealed that ROS navigation
 module's estimated speed coefficient was accurate, but this value was not
 representative of the real-world robot.
-The Thymio II robot utilises an integrated battery to power its self, and
+The Thymio II robot utilises an integrated battery to power itself, and
 during operation the internal voltage of the battery is drained.
 Unfortunately, due to the lack of power regulation, as the voltage of the
 internal battery dropped, so to did the speed of the robots wheels.
-The inconsistent speed wheel at which the wheels operated meant that the
+The inconsistent speed at which the wheels operated meant that the
 constant speed coefficient extracted from the ROS package could not be used to
 accurately determine the location of the robot - as the longer that the robot
 was mobile, the slower its wheels would operate, resulting in more inaccurate
@@ -103,7 +104,7 @@ The Thymio robotic platform's movement operations are controlled by issuing
 commands to change the speed and direction of each wheel individually - by
 setting both wheels to the same speed and direction the robot should move in a
 straight line.
-Experimentation revelead that left wheel of the Thymio II utilised in this
+Experimentation revealed that left wheel of the Thymio II utilised in this
 project was unable to match the same speed as the right wheel - causing the
 robot to curve leftwards when attempting to move directly forwards.
 The cause for this issue was unapparent, but a number of possible reasons were
@@ -194,9 +195,9 @@ or behaviours to be tested before execution on the physical robot platform.
 
 To this end, the source code for the Aseba Playground was inspected to
 understand its structure, makeup, bottlenecks, and pliability to the project
-aims. After some time analysing the system and benchmarking it's performance,
+aims. After some time analysing the system and benchmarking its performance,
 it was determined that the large Qt GUI application was unsuitable to be pared
-down. Instead, it would be deconstructed into it's component parts, and a new
+down. Instead, it would be deconstructed into its component parts, and a new
 simulator and set of tools built in its place.
 
 Although the new simulator would differ internally, it was important that the
@@ -213,8 +214,13 @@ With this in mind, the each of the components identified previously were
 considered for their necessity in a new, minified simulator. Of these that were
 considered vital, their size and complexity was also evaluated, and where
 possible, replaced with a smaller implementation expressing the same interface.
-The total architecture with the Playground is shown below. \editnote{Full
-diagram goes here}.
+The total architecture with the Playground is shown below.
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=\textwidth]{playground.png}
+    \caption{Architecture of the Aseba Playground simulator, and its relation
+    to robot control code.}
+\end{figure}
 
 Ultimately, the following components were kept, in part, or by reimplementation:
 \begin{itemize}
@@ -227,8 +233,12 @@ The GUI was excluded, as visual output was not required. Additionally, much of
 the support code, such as that used to load image files for graphical world
 representation was also dropped.
 
-As a result, the new simulator architecture was as follows: \editnote{Minimal
-implementation diagram}
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=\textwidth]{microenki.png}
+    \caption{Architecture of the Microenki simulator, and its relation to
+    robot control code.}
+\end{figure}
 
 The paring down of the simulator reduces the CPU resources consumed. As a result
 more instances can be executed in parallel. Additionally, for a given segment of
@@ -252,10 +262,8 @@ management routines, adding, removing, and testing for objects in the arrays
 used to store and track the objects. This lack of suitability to GPU
 acceleration was a major blow to the intentions to speed up individual
 instances, one of the main strategies considered alongside the parallelisation
-of whole instances.
-
-\editnote{Phyics-sparse call graph}
-\editnote{Physics-rich call graph}
+of whole instances. These call graphs are presented as auxiliary information
+in appendix B.
 
 Once the implementation of a trimmed down simulation was complete, it was
 measured for CPU consumption at the steady-state, for steady-state RAM
